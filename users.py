@@ -188,3 +188,13 @@ def get_user_by_id(user_id):
         data = (user_id,)
         result = db.perform_query(sql, data)
     return result
+
+
+def hash_password(password):
+    '''
+    Make a hashed version of the provided password
+        @param    password     string     The password to be hashed
+        @return                string     The hashed password
+    '''
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha512:20000', salt_length=8)
+    return hashed_password
