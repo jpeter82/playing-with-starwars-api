@@ -61,3 +61,35 @@ def delete_vote(user_id, planet_id):
     data = (user_id, planet_id)
     result = db.perform_query(sql, data)
     return result
+
+
+
+def get_votes():
+    '''
+    Prepares data for vote statistics, contains TOP 10 voted planets
+        @return   list   List of planets with number of votes
+    '''
+    sql = '''SELECT p.planet_name, COUNT(p.planet_name) vote_count
+             FROM mjkwnf_planet_votes pv
+             INNER JOIN mjkwnf_planets p ON pv.planet_id = p.id
+             GROUP BY p.planet_name
+             ORDER BY vote_count DESC, planet_name
+             LIMIT 10;'''
+    result = db.perform_query(sql)
+    return result
+
+
+def get_votes_by_user_id(user_id):
+    '''
+    Get votes of a specific user
+        @param     user_id    int    User ID
+        @return               list   List of planet names the user voted on
+    '''
+    sql = '''SELECT string_agg(DISTINCT p.planet_name, ',') as voted_planets
+             FROM mjkwnf_planet_votes pv
+             INNER JOIN mjkwnf_planets p ON p.id = pv.planet_id
+             WHERE user_id = %s
+             GROUP BY user_id'''
+    data = (user_id,)
+    result = db.perform_query(sql, data)[0]['voted_planets'].split(',')
+    return result
