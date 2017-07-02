@@ -1,0 +1,131 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,700i');
+
+
+/************************************
+* GENEREAL
+************************************/
+
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+
+
+/************************************
+* NAV
+************************************/
+
+.embossed {
+    text-shadow: -1px -1px 0px rgba(255,255,255,0.3), 1px 1px 0px rgba(0,0,0,0.8);
+	color: #fff;
+	opacity: 0.4;
+	font: 700 1.5rem 'Roboto';
+}
+
+.navbar a {
+	color: #fff;
+}
+
+
+/************************************
+* MAIN
+************************************/
+
+.main-container {
+    background: url(/static/images/galaxy.gif);
+    background-size: cover;
+    color: rgba(237,235,215,0.95);
+}
+
+.alpha-container {
+    padding: 56px 0 50px;
+    background: rgba(28, 42, 51, 0.9);
+}
+
+#planets {
+    width: 85%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+#planets h1 {
+    padding-bottom: 10px;
+}
+
+.preface {
+    padding: 10px 0 30px;
+}
+
+.number-align {
+    text-align: right;
+}
+
+#button-wrap {
+    width: 20%;
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#planets-table {
+    width: 100%;
+    margin: auto;
+}
+
+#planets table th {
+    text-align: center;
+    color: rgba(237,235,215,0.9);
+}
+
+#planets table tbody {
+    color: rgba(237,235,215,0.6);
+}
+
+.center {
+    text-align: center;
+}
+
+#planets .residents button {
+    min-width: 55px;
+}
+
+
+/************************************
+* MODAL
+************************************/
+
+.resident-modal-width {
+    min-width: 800px;
+}
+
+.modal-content-center {
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(28, 42, 51, 1);
+    color: rgba(237,235,215,0.9);
+}
+
+.close {
+    color: rgba(237,235,215,0.9);
+}
+
+.modal-thead th {
+    text-align: center;
+}
+
+.modal-td-right {
+    text-align: right;
+}
+
+.loading {
+    padding: 20px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#votes-table-wrapper {
+    padding: 30px 40px 0;
+}
