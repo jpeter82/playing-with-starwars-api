@@ -1,0 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,700i');
+
+
+/************************************
+* GENEREAL
+************************************/
+
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+
+.content-wrapper{
+    background: url(/static/images/form-bg.jpg);
+    background-size: cover;
+    color: rgba(237,235,215,0.95);
+    min-height: 1200px;
+}
+
+
+/************************************
+* NAV
+************************************/
+
+.embossed {
+    text-shadow: -1px -1px 0px rgba(255,255,255,0.3), 1px 1px 0px rgba(0,0,0,0.8);
+	color: #fff;
+	opacity: 0.4;
+	font: 700 1.5rem 'Roboto';
+}
+
+.navbar a {
+	color: #fff;
+}
+
+
+/************************************
+* FORM
+************************************/
+
+#main-form {
+    padding: 56px 0 50px;
+    background: rgba(28, 42, 51, 0.9);
+    min-height: 1200px;
+}
+
+#form-wrapper{
+    margin: 50px auto;
+    width: 50%;
+}
+
+#form-wrapper h1 {
+    text-align: center;
+    padding: 40px;
+}
+
+#submit-button {
+    margin: 40px auto;
+    display:block;
+}
+
+form .col-8 {
+    margin: 0 auto;
+}
