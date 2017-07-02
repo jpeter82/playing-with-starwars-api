@@ -114,3 +114,44 @@ def verify_login(username, password):
         if (db_user['username'] == username) and check_password_hash(db_user['password'], password):
             status = True
     return status
+
+
+'''
+Login and Registration functions
+'''
+
+
+def register_user(username, password):
+    '''
+    Register new, validated user, store credentials in db
+        @param    username    string    User name provided by new user
+        @param    password    string    Password provided by new user in plain text
+        @return               bool      True if successful, otherwise False
+    '''
+    status = False
+    if username and password:
+        sql = '''INSERT INTO mjkwnf_users (username, password) VALUES (%s, %s) RETURNING id'''
+        data = (username, hash_password(password))
+        status = True if db.perform_query(sql, data) else False
+    return status
+
+
+def login_user(username):
+    ''' Log user in, put username in session'''
+    if username:
+        session.clear()
+        session['username'] = username
+
+
+def logout_user():
+    ''' Log user out, clear everything from session'''
+    session.clear()
+
+
+def login_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'username' in session:
+            return func(*args, **kwargs)
+        return redirect(url_for('login'))
+    return wrapper
