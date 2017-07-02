@@ -99,3 +99,18 @@ def validate_password(password, password2):
             result['errors'].append('password does not match password again!')
 
     return result
+
+
+def verify_login(username, password):
+    '''
+    Check user credentials for logging in
+        @param     username    string    The username to check
+        @param     password    string    The password to check
+        @return                bool      True if credentials match, otherwise False
+    '''
+    status = False
+    db_user = get_user_by_username(username)[0]
+    if db_user:
+        if (db_user['username'] == username) and check_password_hash(db_user['password'], password):
+            status = True
+    return status
