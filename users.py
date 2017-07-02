@@ -155,3 +155,36 @@ def login_required(func):
             return func(*args, **kwargs)
         return redirect(url_for('login'))
     return wrapper
+
+
+'''
+Helper functions
+'''
+
+
+def get_user_by_username(username):
+    '''
+    Get all details of a user by its user name
+        @param    username    int     The name of the user to be found
+        @return               list    All details of the user or empty list if user does not exist in db
+    '''
+    result = None
+    if username:
+        sql = '''SELECT * FROM mjkwnf_users WHERE username = %s'''
+        data = (username,)
+        result = db.perform_query(sql, data)
+    return result
+
+
+def get_user_by_id(user_id):
+    '''
+    Get all details of a user by its ID
+        @param    user_id    int     The ID of the user to be found
+        @return              list    All details of the user or empty list if user does not exist in db
+    '''
+    result = None
+    if user_id:
+        sql = '''SELECT * FROM mjkwnf_users WHERE id = %s'''
+        data = (user_id,)
+        result = db.perform_query(sql, data)
+    return result
