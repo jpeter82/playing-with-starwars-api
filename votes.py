@@ -63,7 +63,6 @@ def delete_vote(user_id, planet_id):
     return result
 
 
-
 def get_votes():
     '''
     Prepares data for vote statistics, contains TOP 10 voted planets
@@ -92,4 +91,20 @@ def get_votes_by_user_id(user_id):
              GROUP BY user_id'''
     data = (user_id,)
     result = db.perform_query(sql, data)[0]['voted_planets'].split(',')
+    return result
+
+
+def handle_vote(planet_name):
+    '''
+    Contains voting logic. Only one vote is allowed on a planet, it adds or deletes
+    the vote of the user.
+        @param    planet_name    string    Name of the planet the user votes on
+        @return                  list      Contains the details of the added/deleted vote
+    '''
+    user_id = users.get_user_by_username(session.get('username'))[0]['id']
+    planet_id = get_planet_by_name(planet_name)[0]['id']
+    if check_user_vote(user_id, planet_id):
+        result = delete_vote(user_id, planet_id)
+    else:
+        result = insert_vote(user_id, planet_id)
     return result
