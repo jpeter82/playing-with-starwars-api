@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock head %}
+
+{% block content %}
+    <div id="main-content">
+        <div id="main-image">
+            <img src="{{ url_for('static', filename='images/star-wars-travel-guide.png') }}" alt="demo-planets">
+        </div>
+    </div>
+{% endblock %}
