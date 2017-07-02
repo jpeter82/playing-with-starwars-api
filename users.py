@@ -54,3 +54,48 @@ def validate_username(username):
             result['errors'].append('username is already taken!')
 
     return result
+
+
+def validate_password(password, password2):
+    '''
+    Validate password upon registration. A password must be min 6 chars, must contain at least of the following:
+    uppercase, lowercase, special symbol char and a digit. Password also needs to match Password Again.
+        @param     password      string     Password to check
+        @param     password2     string     Password Again to check
+        @return                  dict       Status for validity and a list of errors if present
+    '''
+    result = {'status': False}
+    if password and password2:
+        length_error = len(password) < 6
+        digit_error = re.search(r"\d", password) is None
+        uppercase_error = re.search(r"[A-Z]", password) is None
+        lowercase_error = re.search(r"[a-z]", password) is None
+        symbol_error = re.search(r"[\W_]", password) is None
+        matching_error = password != password2
+        valid_password = not (length_error or digit_error or uppercase_error or
+                              lowercase_error or symbol_error or matching_error)
+
+        result = {
+            'status': valid_password,
+            'errors': []
+        }
+
+        if length_error:
+            result['errors'].append('password must be min 6 characters!')
+
+        if digit_error:
+            result['errors'].append('password must contain at least one digit!')
+
+        if uppercase_error:
+            result['errors'].append('password must contain at least one uppercase letter!')
+
+        if lowercase_error:
+            result['errors'].append('password must contain at least one lowercase letter!')
+
+        if symbol_error:
+            result['errors'].append('password must contain at least one special character! (i.e !?&#-_\/&<>%)')
+
+        if matching_error:
+            result['errors'].append('password does not match password again!')
+
+    return result
