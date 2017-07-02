@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock head %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div id="main-page">
+            <img id="img-404" src="{{ url_for('static', filename='images/404.jpg') }}" alt="400-error">
+        </div>
+    </div>
+{% endblock %}
