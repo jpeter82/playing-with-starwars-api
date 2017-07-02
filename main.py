@@ -60,3 +60,35 @@ def login():
                 users.login_user(username)
                 return redirect(url_for('content'))
     return render_template('login.html', messages=messages)
+
+
+@app.route('/logout')
+@users.login_required
+def logout():
+    users.logout_user()
+    return redirect(url_for('index'))
+
+
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = datetime.timedelta(minutes=20)
+    session.modified = True
+
+
+@app.route('/vote', methods=['POST'])
+@users.login_required
+def vote():
+    result = jsonify(status=False)
+    if request.method == 'POST':
+        planet_name = request.form.get('planet_name', '')
+        if planet_name:
+            if votes.handle_vote(planet_name):
+                result = jsonify(status=True)
+    return result
+
+
+@app.route('/vote-stats')
+@users.login_required
+def get_vote_statistics():
+    return jsonify({'vote_stats': votes.get_votes()})
